@@ -3,3 +3,4 @@ fastapi==0.75.0
 pydantic==1.8.2
 SQLAlchemy==1.4.26
 uvicorn==0.13.4
+aiosqlite
