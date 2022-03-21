@@ -9,6 +9,9 @@ app = FastAPI()
 app.include_router(router)
 
 
+@app.get("/")
+def root():
+    return {"home": "my home"}
 @app.on_event("startup")
 async def startup():
     if not db.database.is_connected:
