@@ -43,6 +43,13 @@ Notes:
   
  URL_HOST can be your localhost(in development) or your heroku-project-name-herokuapp.com/ (in production)
  
+ ### FastAPI Swagger Ui
+ 
+ FastAPI is very useful when it comes to documentation of your api, through Swagger you will be able to have your API's docs without any effort
+ 
+ ![image](https://user-images.githubusercontent.com/42675180/159958799-ae5ae91a-a062-49d2-b99e-138cd87531cb.png)
+
+ 
 
 
  
