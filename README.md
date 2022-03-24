@@ -2,6 +2,8 @@
 
 This project is just a showcase on how to use Python as backend for flutter application and deploy them using heroku.
 
+##### This project was mentioned on https://github.com/antonio-pedro99/fastapi_example  
+
 ## FastAPI
 
 To build the backend, I used FastAPI which is a modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints.
@@ -41,7 +43,6 @@ Notes:
   
  URL_HOST can be your localhost(in development) or your heroku-project-name-herokuapp.com/ (in production)
  
-
 
 
  
