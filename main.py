@@ -1,5 +1,3 @@
-from typing import List, Optional
-
 import uvicorn
 import database as db
 from fastapi import FastAPI
@@ -11,7 +9,8 @@ app.include_router(router)
 
 @app.get("/")
 def root():
-    return {"home": "my home"}
+    return {"msg": "There is nothing here. Try /docs to see all endpoints"}
+    
 @app.on_event("startup")
 async def startup():
     if not db.database.is_connected:

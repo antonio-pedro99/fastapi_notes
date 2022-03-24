@@ -2,7 +2,7 @@ import sqlalchemy
 import databases
 
 
-DATABASE_URL = "sqlite:///./test.db"
+DATABASE_URL = "sqlite:///./my_db.db"
 
 database = databases.Database(DATABASE_URL)
 metadata = sqlalchemy.MetaData()
@@ -10,7 +10,7 @@ metadata = sqlalchemy.MetaData()
 notes = sqlalchemy.Table(
     "notes",
     metadata,
-    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key = True, auto_increment= True),
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key = True),
     sqlalchemy.Column("text", sqlalchemy.String),
     sqlalchemy.Column("completed", sqlalchemy.Boolean),
 )

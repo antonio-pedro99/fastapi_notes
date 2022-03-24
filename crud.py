@@ -1,23 +1,31 @@
-from typing import List, Optional
-
-from fastapi import FastAPI, APIRouter
+from typing import List
+from fastapi import APIRouter
 import database as db
-from models import Note, NoteIn
+from models import Note, NoteIn, NoteUp
 
 router = APIRouter()
 
-@router.get("/notes/", response_model = List[Note])
+@router.get("/notes/", response_model = List[Note], tags=["Notes"])
 async def read_notes():
-    query = db.notes.select()
-    return await db.database.fetch_all(query)
+    return db.engine.execute(db.notes.select()).fetchall()
 
-@router.post("/notes/", response_model = Note)
+@router.get("/notes/{note_id}",tags=["Notes"] )
+async def get_note_by_id(note_id:int):
+    return db.engine.execute(db.notes.select().where(db.notes.c.id == note_id)).first()
+
+
+@router.post("/notes/", response_model = Note, tags=["Notes"])
 async def create_note(note: NoteIn):
-    query = db.notes.insert().values(text = note.text, completed = note.completed)
-    last_id = await db.database.execute(query)
-    return {**note.dict(), "id": last_id}
+    query = db.engine.execute(db.notes.insert().values(text = note.text, completed = note.completed))
+    return db.engine.execute(db.notes.select().where(db.notes.c.id == query.lastrowid)).first()
 
 
-# @router.delete("/notes/{note_id}", response_model = List[Note])
-# async def delete_note(note_id: int):
-    
+@router.post("/notes/{note_id}", response_model=Note,  tags=["Notes"])
+async def update_note(note:NoteUp, note_id:int):
+    db.engine.execute(db.notes.update().where(db.notes.c.id == note_id).values(completed= note.completed))
+    return  db.engine.execute(db.notes.select().where(db.notes.c.id == note_id)).first()
+
+@router.delete("/notes/{note_id}", response_model = List[Note], tags=["Notes"])
+async def delete_note(note_id: int):
+    db.engine.execute(db.notes.delete().where(db.notes.c.id == note_id))
+    return db.engine.execute(db.notes.select()).fetchall()
