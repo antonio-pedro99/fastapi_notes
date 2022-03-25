@@ -12,3 +12,6 @@ class Note(BaseModel):
     id: int
     text: str
     completed: bool
+
+    class Config:
+        orm_mode = True

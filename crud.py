@@ -20,10 +20,11 @@ async def create_note(note: NoteIn):
     return db.engine.execute(db.notes.select().where(db.notes.c.id == query.lastrowid)).first()
 
 
-@router.post("/notes/{note_id}", response_model=Note,  tags=["Notes"])
+@router.put("/notes/{note_id}", response_model=Note,  tags=["Notes"])
 async def update_note(note:NoteUp, note_id:int):
     db.engine.execute(db.notes.update().where(db.notes.c.id == note_id).values(completed= note.completed))
     return  db.engine.execute(db.notes.select().where(db.notes.c.id == note_id)).first()
+
 
 @router.delete("/notes/{note_id}", response_model = List[Note], tags=["Notes"])
 async def delete_note(note_id: int):
