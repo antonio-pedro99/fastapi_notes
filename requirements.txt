@@ -2,5 +2,5 @@ databases==0.5.3
 fastapi==0.75.0
 pydantic==1.8.2
 SQLAlchemy==1.4.26
-uvicorn==0.13.4
+uvicorn>=0.13.0,<=0.13.4
 aiosqlite
